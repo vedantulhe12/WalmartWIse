@@ -1,0 +1,492 @@
+/* Dashboard.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+}
+
+/* Header Section */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.welcome-section h1 {
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-avatar {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name {
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.profile-status {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-top: 2px;
+}
+
+/* Store Location Section */
+.store-location-section {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.location-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.location-icon {
+  font-size: 24px;
+  margin-right: 15px;
+  background: #f0f9ff;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.location-info {
+  flex: 1;
+}
+
+.location-info h3 {
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.location-info p {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.change-location-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.change-location-btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.map-preview {
+  position: relative;
+  height: 200px;
+  background: #f8fafc;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 2px solid #e2e8f0;
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: linear-gradient(45deg, #f0f9ff 25%, transparent 25%),
+              linear-gradient(-45deg, #f0f9ff 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, #f0f9ff 75%),
+              linear-gradient(-45deg, transparent 75%, #f0f9ff 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+.map-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.store-marker {
+  font-size: 30px;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+.map-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.map-section {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.map-section.electronics {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+}
+
+.map-section.clothing {
+  background: rgba(236, 72, 153, 0.1);
+  color: #db2777;
+}
+
+.map-section.groceries {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.map-section.pharmacy {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.map-overlay {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* Quick Actions Section */
+.quick-actions-section {
+  margin-bottom: 30px;
+}
+
+.quick-actions-section h2 {
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.action-card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.action-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.action-icon {
+  font-size: 32px;
+  background: #f0f9ff;
+  padding: 15px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.action-content {
+  flex: 1;
+}
+
+.action-content h3 {
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.action-content p {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.action-arrow {
+  font-size: 20px;
+  color: #3b82f6;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.action-card:hover .action-arrow {
+  transform: translateX(5px);
+}
+
+/* Highlights Section */
+.highlights-section {
+  margin-bottom: 30px;
+}
+
+.highlights-section h2 {
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.highlight-card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.highlight-card:hover {
+  transform: translateY(-3px);
+}
+
+.highlight-icon {
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.highlight-card.trending .highlight-icon {
+  background: #fef3c7;
+}
+
+.highlight-card.offers .highlight-icon {
+  background: #ecfdf5;
+}
+
+.highlight-card.new-arrivals .highlight-icon {
+  background: #f3e8ff;
+}
+
+.highlight-content h4 {
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.highlight-content p {
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* Recent Activity Section */
+.recent-activity-section {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.recent-activity-section h2 {
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.activity-item:hover {
+  background: #f1f5f9;
+}
+
+.activity-icon {
+  font-size: 20px;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.activity-content p {
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.activity-time {
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 15px;
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .welcome-section h1 {
+    font-size: 26px;
+  }
+  
+  .actions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .location-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .map-preview {
+    height: 150px;
+  }
+  
+  .map-grid {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header {
+    padding: 20px;
+  }
+  
+  .welcome-section h1 {
+    font-size: 22px;
+  }
+  
+  .action-card {
+    padding: 15px;
+  }
+  
+  .action-icon {
+    font-size: 24px;
+    padding: 10px;
+  }
+  
+  .store-location-section,
+  .recent-activity-section {
+    padding: 20px;
+  }
+}
