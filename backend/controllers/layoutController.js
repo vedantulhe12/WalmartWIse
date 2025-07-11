@@ -12,7 +12,7 @@ router.get("/stores/:country", (req, res) => {
 
 router.get("/layout/:storeId", (req, res) => {
   const store = stores.find((s) => s.id === req.params.storeId);
-  if (!store) return res.status(404).json({ message: "Store not found" });
+  if (!store) return res.status(404).json({ message: "Store not found" })
 
   const layoutData = layouts[store.layout];
   res.json({ store, layout: layoutData });

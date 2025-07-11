@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import LoginPage from "./pages/LoginPage"; 
 import Dashboard from "./pages/Dashboard";
+import StoreLayoutPage from "./pages/storeLayoutPage.jsx";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/store-layout" element={<StoreLayoutPage />} /> {/* ✅ new route */}
       </Routes>
     </>
   );

@@ -11,19 +11,19 @@ const GlobeComponent = ({ onCountryClick }) => {
   const [countries, setCountries] = useState([]);
   const [locations, setLocations] = useState([]);
 
-  // Load country polygons
+  // 🌍 Load GeoJSON country polygons
   useEffect(() => {
     fetch("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
       .then((res) => res.json())
       .then((data) => setCountries(data.features));
   }, []);
 
-  // Load Walmart locations
+  // 🏪 Load Walmart store locations
   useEffect(() => {
     setLocations(storeData);
   }, []);
 
-  // Center on USA + Auto rotate
+  // 📌 Initial camera focus on USA + enable auto rotation
   useEffect(() => {
     if (globeRef.current) {
       globeRef.current.pointOfView({ lat: 37.0902, lng: -95.7129, altitude: 2.2 }, 1500);
@@ -35,7 +35,7 @@ const GlobeComponent = ({ onCountryClick }) => {
     }
   }, []);
 
-  // Add ambient light to brighten globe
+  // 💡 Add ambient light
   useEffect(() => {
     if (globeRef.current) {
       const scene = globeRef.current.scene();
@@ -44,14 +44,15 @@ const GlobeComponent = ({ onCountryClick }) => {
     }
   }, []);
 
+  // 👉 Handle store point click
   const handleStoreSelect = (store) => {
     localStorage.setItem("selectedStore", JSON.stringify(store));
-    navigate("/login");
+    navigate("dashboard"); // 🔁 Redirect to layout page
   };
 
   return (
     <div className="relative h-[600px] w-full bg-gradient-to-br from-[#0b0b28] to-[#191970]">
-      {/* US-only Overlay */}
+      {/* Info overlay */}
       <div className="absolute top-4 left-4 z-50 bg-black/70 text-white px-4 py-2 rounded shadow-md text-sm">
         📍 Currently showing Walmart stores in the <b>United States</b>
       </div>
@@ -62,7 +63,7 @@ const GlobeComponent = ({ onCountryClick }) => {
         bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
         backgroundColor="rgba(0, 0, 0, 0)"
 
-        // Country Polygons
+        // 🌐 Country polygons
         polygonsData={countries}
         polygonAltitude={0.01}
         polygonCapColor={(d) =>
@@ -81,10 +82,10 @@ const GlobeComponent = ({ onCountryClick }) => {
         polygonLabel={({ properties: d }) => `<b>${d.name}</b>`}
         polygonsTransitionDuration={300}
 
-        // Walmart Store Points
+        // 🧡 Store markers
         pointsData={locations}
         pointMaterial={new THREE.MeshBasicMaterial({
-          color: 'orange',
+          color: "orange",
           transparent: true,
           opacity: 0.85,
           blending: THREE.AdditiveBlending

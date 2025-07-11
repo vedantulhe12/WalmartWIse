@@ -1,56 +1,86 @@
-import React, { useState } from 'react';
-import './Dashboard.css';
+import React, { useState, useEffect } from "react";
+import "./Dashboard.css";
+import SmallLayout from "../components/layouts/SmallLayout";
+import MediumLayout from "../components/layouts/MediumLayout";
+import LargeLayout from "../components/layouts/LargeLayout";
 
 const Dashboard = () => {
-  const [userName] = useState('Vedant');
-  const [storeLocation] = useState('Pune Central Mall, Maharashtra');
+  const [userName] = useState("Vedant");
+  const [selectedStore, setSelectedStore] = useState(null);
+  const [layoutType, setLayoutType] = useState("small");
+
+  useEffect(() => {
+    const store = JSON.parse(localStorage.getItem("selectedStore"));
+    setSelectedStore(store);
+
+    if (store) {
+      const largeStates = ["CA", "NY", "TX", "FL"];
+      const mediumStates = ["GA", "IL", "MI", "PA"];
+
+      if (largeStates.includes(store.state)) setLayoutType("large");
+      else if (mediumStates.includes(store.state)) setLayoutType("medium");
+      else setLayoutType("small");
+    }
+  }, []);
 
   const quickActions = [
     {
-      id: 'shopping-guide',
-      icon: '🛍️',
-      title: 'Start Shopping Guide',
-      description: 'Get personalized shopping recommendations',
-      path: '/guide'
+      id: "shopping-guide",
+      icon: "🛍️",
+      title: "Start Shopping Guide",
+      description: "Get personalized shopping recommendations",
+      path: "/guide",
     },
     {
-      id: 'store-map',
-      icon: '🗺️',
-      title: 'View Store Map',
-      description: 'Navigate through store sections',
-      path: '/map'
+      id: "store-map",
+      icon: "🗺️",
+      title: "View Store Map",
+      description: "Navigate through store sections",
+      path: "/map",
     },
     {
-      id: 'chat-assistant',
-      icon: '🤖',
-      title: 'Chat with Assistant',
-      description: 'Get instant help and support',
-      path: '/chat'
+      id: "chat-assistant",
+      icon: "🤖",
+      title: "Chat with Assistant",
+      description: "Get instant help and support",
+      path: "/chat",
     },
     {
-      id: 'local-insights',
-      icon: '📊',
-      title: 'See Local Insights',
-      description: 'View trending products and offers',
-      path: '/insights'
-    }
+      id: "local-insights",
+      icon: "📊",
+      title: "See Local Insights",
+      description: "View trending products and offers",
+      path: "/insights",
+    },
   ];
 
   const handleQuickAction = (action) => {
-    // In a real app, you'd use React Router's navigate
     console.log(`Navigating to ${action.path}`);
-    // Example: navigate(action.path);
+  };
+
+  const renderStoreLayout = () => {
+    if (!selectedStore) return <p>Loading store layout...</p>;
+
+    switch (layoutType) {
+      case "small":
+        return <SmallLayout store={selectedStore} />;
+      case "medium":
+        return <MediumLayout store={selectedStore} />;
+      case "large":
+        return <LargeLayout store={selectedStore} />;
+      default:
+        return <p>Unknown layout type.</p>;
+    }
   };
 
   return (
     <div className="dashboard">
-      {/* Header Section */}
       <div className="dashboard-header">
         <div className="welcome-section">
           <h1>Welcome {userName}</h1>
           <p className="subtitle">Ready to explore today's best deals?</p>
         </div>
-        
+
         <div className="user-profile">
           <div className="profile-avatar">
             <span>{userName.charAt(0)}</span>
@@ -62,37 +92,28 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Store Location Section */}
-      <div className="store-location-section">
-        <div className="location-header">
-          <div className="location-icon">📍</div>
-          <div className="location-info">
-            <h3>Your Store Location</h3>
-            <p>{storeLocation}</p>
-          </div>
-          <button className="change-location-btn">Change</button>
-        </div>
-
-        {/* Store Map Preview */}
-        <div className="map-preview">
-          <div className="map-placeholder">
-            <div className="map-content">
-              <div className="store-marker">🏬</div>
-              <div className="map-grid">
-                <div className="map-section electronics">Electronics</div>
-                <div className="map-section clothing">Clothing</div>
-                <div className="map-section groceries">Groceries</div>
-                <div className="map-section pharmacy">Pharmacy</div>
-              </div>
+      {selectedStore && (
+        <div className="store-location-section">
+          <div className="location-header">
+            <div className="location-icon">📍</div>
+            <div className="location-info">
+              <h3>Your Store Location</h3>
+              <p>
+                {selectedStore.name}, {selectedStore.city}, {selectedStore.state}
+              </p>
             </div>
-            <div className="map-overlay">
-              <span>Interactive Store Map</span>
+            <button className="change-location-btn">Change</button>
+          </div>
+
+          <div className="store-layout-container">
+            <h2 className="text-xl font-bold mb-2">Store Layout ({layoutType})</h2>
+            <div className="store-layout-box">
+              {renderStoreLayout()}
             </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* Quick Actions Section */}
       <div className="quick-actions-section">
         <h2>Quick Actions</h2>
         <div className="actions-grid">
@@ -113,7 +134,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Today's Highlights Section */}
       <div className="highlights-section">
         <h2>Today's Highlights</h2>
         <div className="highlights-grid">
@@ -124,7 +144,6 @@ const Dashboard = () => {
               <p>Summer collection items</p>
             </div>
           </div>
-          
           <div className="highlight-card offers">
             <div className="highlight-icon">🎉</div>
             <div className="highlight-content">
@@ -132,7 +151,6 @@ const Dashboard = () => {
               <p>Up to 50% off on electronics</p>
             </div>
           </div>
-          
           <div className="highlight-card new-arrivals">
             <div className="highlight-icon">✨</div>
             <div className="highlight-content">
@@ -143,7 +161,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Recent Activity Section */}
       <div className="recent-activity-section">
         <h2>Recent Activity</h2>
         <div className="activity-list">
@@ -154,17 +171,19 @@ const Dashboard = () => {
               <span className="activity-time">2 hours ago</span>
             </div>
           </div>
-          
-          <div className="activity-item loyalty">🏆</div>
-          <div className="activity-content">
-            <p>Earned 150 loyalty points</p>
-            <span className="activity-time">1 day ago</span>
+          <div className="activity-item">
+            <div className="activity-icon loyalty">🏆</div>
+            <div className="activity-content">
+              <p>Earned 150 loyalty points</p>
+              <span className="activity-time">1 day ago</span>
+            </div>
           </div>
-          
-          <div className="activity-item guide">📖</div>
-          <div className="activity-content">
-            <p>Completed "Store Navigation" guide</p>
-            <span className="activity-time">3 days ago</span>
+          <div className="activity-item">
+            <div className="activity-icon guide">📖</div>
+            <div className="activity-content">
+              <p>Completed "Store Navigation" guide</p>
+              <span className="activity-time">3 days ago</span>
+            </div>
           </div>
         </div>
       </div>
