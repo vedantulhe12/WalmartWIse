@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import storeData from "../assets/walmart_stores.json";
 
 const GlobeComponent = ({ onCountryClick }) => {
-  const res = await.fetch("");
   const globeRef = useRef();
   const navigate = useNavigate();
 
