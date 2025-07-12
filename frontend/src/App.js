@@ -5,7 +5,9 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import LoginPage from "./pages/LoginPage"; 
 import Dashboard from "./pages/Dashboard";
-import StoreLayoutPage from "./pages/storeLayoutPage.jsx";
+import ShoppingGuide from "./pages/ShoppingGuide";
+import StoreMap from "./pages/StoreMap";
+import LocalInsightsPage from "./pages/LocalInsightPage";
 
 const App = () => {
   return (
@@ -16,7 +18,9 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/store-layout" element={<StoreLayoutPage />} /> {/* ✅ new route */}
+        <Route path="/guide" element={<ShoppingGuide />} />
+        <Route path="/map" element={<StoreMap />} />
+        <Route path="/insights" element={<LocalInsightsPage />} />
       </Routes>
     </>
   );

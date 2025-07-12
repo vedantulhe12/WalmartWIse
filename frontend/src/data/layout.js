@@ -1,3 +1,5 @@
+// src/data/layout.js
+
 export const layouts = {
   small: {
     type: "small",
@@ -16,7 +18,7 @@ export const layouts = {
       { name: "Clothing", x: 0, y: 3, width: 5, height: 1 },
     ],
   },
-  large: {
+  supercenter: {
     type: "supercenter",
     sections: [
       { name: "Entrance", x: 0, y: 0, width: 2, height: 1 },

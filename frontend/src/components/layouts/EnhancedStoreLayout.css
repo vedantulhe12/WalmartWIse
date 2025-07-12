@@ -1,10 +1,9 @@
-/* Enhanced Store Layout Styles */
+/* ───── Container & Controls ───── */
 .enhanced-store-layout {
   width: 100%;
   margin: 20px 0;
 }
 
-/* Layout Controls */
 .layout-controls {
   display: flex;
   justify-content: space-between;
@@ -61,8 +60,16 @@
   color: white;
 }
 
-/* Store Layout Wrapper */
+/* ───── Store Floor & Grid ───── */
+.store-floor {
+  background: #f2f4f5;
+  padding: 14px;
+  border-radius: 16px;
+  position: relative;
+}
+
 .store-layout-wrapper {
+  position: relative;
   background: white;
   border-radius: 20px;
   padding: 25px;
@@ -71,28 +78,29 @@
   overflow-x: auto;
 }
 
-/* Enhanced Store Grid */
 .enhanced-store-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 12px;
-  min-height: 400px;
+  grid-template-rows: repeat(3, 1fr) 64px repeat(3, 1fr);
+  grid-auto-rows: 90px;
+  gap: 14px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f5f5f5;
   position: relative;
 }
 
-.enhanced-store-grid.small {
-  min-height: 300px;
+/* ───── Aisle Path ───── */
+.layout-aisle {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 2px #e2e8f0;
+  pointer-events: none;
 }
 
-.enhanced-store-grid.medium {
-  min-height: 450px;
-}
-
-.enhanced-store-grid.large {
-  min-height: 500px;
-}
-
-/* Enhanced Layout Sections */
+/* ───── Section Styling ───── */
 .layout-section.enhanced {
   position: relative;
   border: 2px solid transparent;
@@ -101,11 +109,11 @@
   cursor: pointer;
   transition: all 0.3s ease;
   overflow: hidden;
-  min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #f8fafc;
+  min-height: 80px;
 }
 
 .layout-section.enhanced:hover {
@@ -116,12 +124,13 @@
 .layout-section.enhanced.selected {
   border-color: #3b82f6;
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  outline: 3px solid #4caf50;
 }
 
-/* Section Content */
+/* ───── Section Content ───── */
 .section-content {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   text-align: center;
   transition: transform 0.3s ease;
 }
@@ -143,114 +152,45 @@
   line-height: 1.2;
 }
 
-/* Section Overlay for Hover Effects */
-.section-overlay {
+/* ───── Overlay & Paths ───── */
+.section-overlay,
+.walking-path {
   position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transition: left 0.5s ease;
   pointer-events: none;
+  z-index: 3;
 }
 
 .layout-section.enhanced:hover .section-overlay {
   left: 100%;
+  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
 }
 
-/* Color Schemes for Different Sections */
-.layout-section.enhanced.grocery {
-  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-  border-color: #16a34a;
-}
+/* ───── Section Colors ───── */
+.layout-section.enhanced.grocery     { background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-color: #16a34a; }
+.layout-section.enhanced.meat        { background: linear-gradient(135deg, #fecaca, #fca5a5); border-color: #dc2626; }
+.layout-section.enhanced.bakery      { background: linear-gradient(135deg, #fef3c7, #fed7aa); border-color: #d97706; }
+.layout-section.enhanced.checkout    { background: linear-gradient(135deg, #f1f5f9, #e2e8f0); border-color: #64748b; }
+.layout-section.enhanced.electronics { background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-color: #2563eb; }
+.layout-section.enhanced.clothing    { background: linear-gradient(135deg, #fce7f3, #fbcfe8); border-color: #db2777; }
+.layout-section.enhanced.pharmacy    { background: linear-gradient(135deg, #ccfbf1, #99f6e4); border-color: #059669; }
+.layout-section.enhanced.toys        { background: linear-gradient(135deg, #f3e8ff, #e9d5ff); border-color: #7c3aed; }
+.layout-section.enhanced.deli        { background: linear-gradient(135deg, #fed7aa, #fdba74); border-color: #ea580c; }
+.layout-section.enhanced.produce     { background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-color: #10b981; }
+.layout-section.enhanced.dairy       { background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-color: #3b82f6; }
+.layout-section.enhanced.frozen      { background: linear-gradient(135deg, #cffafe, #a5f3fc); border-color: #0891b2; }
+.layout-section.enhanced.beverages   { background: linear-gradient(135deg, #e0e7ff, #c7d2fe); border-color: #6366f1; }
+.layout-section.enhanced.home        { background: linear-gradient(135deg, #fef3c7, #fde68a); border-color: #f59e0b; }
+.layout-section.enhanced.automotive  { background: linear-gradient(135deg, #f4f4f5, #d4d4d8); border-color: #71717a; }
+.layout-section.enhanced.pets        { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-color: #22c55e; }
+.layout-section.enhanced.health      { background: linear-gradient(135deg, #f5f3ff, #ede9fe); border-color: #8b5cf6; }
+.layout-section.enhanced.snacks      { background: linear-gradient(135deg, #fdf4ff, #fae8ff); border-color: #a855f7; }
 
-.layout-section.enhanced.meat {
-  background: linear-gradient(135deg, #fecaca, #fca5a5);
-  border-color: #dc2626;
-}
-
-.layout-section.enhanced.bakery {
-  background: linear-gradient(135deg, #fef3c7, #fed7aa);
-  border-color: #d97706;
-}
-
-.layout-section.enhanced.checkout {
-  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-  border-color: #64748b;
-}
-
-.layout-section.enhanced.electronics {
-  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-  border-color: #2563eb;
-}
-
-.layout-section.enhanced.clothing {
-  background: linear-gradient(135deg, #fce7f3, #fbcfe8);
-  border-color: #db2777;
-}
-
-.layout-section.enhanced.pharmacy {
-  background: linear-gradient(135deg, #ccfbf1, #99f6e4);
-  border-color: #059669;
-}
-
-.layout-section.enhanced.toys {
-  background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
-  border-color: #7c3aed;
-}
-
-.layout-section.enhanced.deli {
-  background: linear-gradient(135deg, #fed7aa, #fdba74);
-  border-color: #ea580c;
-}
-
-.layout-section.enhanced.produce {
-  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-  border-color: #10b981;
-}
-
-.layout-section.enhanced.dairy {
-  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-  border-color: #3b82f6;
-}
-
-.layout-section.enhanced.frozen {
-  background: linear-gradient(135deg, #cffafe, #a5f3fc);
-  border-color: #0891b2;
-}
-
-.layout-section.enhanced.beverages {
-  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
-  border-color: #6366f1;
-}
-
-.layout-section.enhanced.home {
-  background: linear-gradient(135deg, #fef3c7, #fde68a);
-  border-color: #f59e0b;
-}
-
-.layout-section.enhanced.automotive {
-  background: linear-gradient(135deg, #f4f4f5, #d4d4d8);
-  border-color: #71717a;
-}
-
-.layout-section.enhanced.pets {
-  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-  border-color: #22c55e;
-}
-
-.layout-section.enhanced.health {
-  background: linear-gradient(135deg, #f5f3ff, #ede9fe);
-  border-color: #8b5cf6;
-}
-
-.layout-section.enhanced.snacks {
-  background: linear-gradient(135deg, #fdf4ff, #fae8ff);
-  border-color: #a855f7;
-}
-
-/* Section Details */
+/* ───── Section Details Panel ───── */
 .section-details {
   background: white;
   border-radius: 15px;
@@ -262,14 +202,8 @@
 }
 
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .details-header {
@@ -350,104 +284,72 @@
   font-size: 14px;
 }
 
-/* Legend */
-.layout-legend {
+/* ───── Minimap ───── */
+.store-minimap {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 15px 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  gap: 6px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 8px;
+  justify-content: center;
 }
 
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 14px;
-}
-
-.legend-color {
-  width: 16px;
-  height: 16px;
+.minimap-block {
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 32px;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  border: 1px solid #aaa;
+  transition: all 0.2s;
 }
 
-.legend-color.selected-demo {
-  background: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+.minimap-block.active {
+  outline: 2px solid #4caf50;
+  transform: scale(1.15);
 }
 
-.legend-color.hover-demo {
-  background: linear-gradient(45deg, #dcfce7, #bbf7d0);
-}
-
-.legend-color.layout-demo {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Responsive Design */
+/* ───── Responsive ───── */
 @media (max-width: 768px) {
   .enhanced-store-grid {
     grid-template-columns: repeat(6, 1fr);
     gap: 8px;
   }
-  
+
   .layout-controls {
     flex-direction: column;
     gap: 15px;
     text-align: center;
   }
-  
+
   .layout-section.enhanced {
     padding: 15px;
     min-height: 70px;
   }
-  
-  .section-icon {
-    font-size: 24px;
-    margin-bottom: 6px;
-  }
-  
-  .section-name {
-    font-size: 12px;
-  }
-  
-  .details-content {
-    grid-template-columns: 1fr;
-  }
-  
-  .layout-legend {
-    flex-direction: column;
-    gap: 12px;
-  }
+
+  .section-icon { font-size: 24px; }
+  .section-name { font-size: 12px; }
+  .details-content { grid-template-columns: 1fr; }
+  .layout-legend { flex-direction: column; gap: 12px; }
 }
 
 @media (max-width: 480px) {
   .enhanced-store-grid {
     grid-template-columns: repeat(4, 1fr);
   }
-  
-  .store-layout-wrapper {
-    padding: 15px;
-  }
-  
+
+  .store-layout-wrapper { padding: 15px; }
+
   .layout-section.enhanced {
     padding: 10px;
     min-height: 60px;
   }
-  
-  .section-icon {
-    font-size: 20px;
-    margin-bottom: 4px;
-  }
-  
-  .section-name {
-    font-size: 11px;
-  }
-}
 
+  .section-icon { font-size: 20px; }
+  .section-name { font-size: 11px; }
+}

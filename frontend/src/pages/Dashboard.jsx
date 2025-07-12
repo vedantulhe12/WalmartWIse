@@ -3,12 +3,22 @@ import "./Dashboard.css";
 import SmallLayout from "../components/layouts/SmallLayout";
 import MediumLayout from "../components/layouts/MediumLayout";
 import LargeLayout from "../components/layouts/LargeLayout";
+import {auth} from "../firebase";
+import ChatDrawer from "../components/chat/chatDrawer"; // <‑‑ adjust path/case if needed
+import { useNavigate } from "react-router-dom"; 
 
 const Dashboard = () => {
-  const [userName] = useState("Vedant");
+  const navigate = useNavigate();
+const [userName, setUserName] = useState(""); // updated to allow dynamic name
   const [selectedStore, setSelectedStore] = useState(null);
   const [layoutType, setLayoutType] = useState("small");
+  const [isChatOpen, setIsChatOpen] = useState(false); // chat‑drawer state
 
+  
+
+  /* ------------------------------------------------------------------ */
+  /*  Load store selection and decide which layout component to show    */
+  /* ------------------------------------------------------------------ */
   useEffect(() => {
     const store = JSON.parse(localStorage.getItem("selectedStore"));
     setSelectedStore(store);
@@ -16,13 +26,27 @@ const Dashboard = () => {
     if (store) {
       const largeStates = ["CA", "NY", "TX", "FL"];
       const mediumStates = ["GA", "IL", "MI", "PA"];
-
       if (largeStates.includes(store.state)) setLayoutType("large");
       else if (mediumStates.includes(store.state)) setLayoutType("medium");
       else setLayoutType("small");
     }
   }, []);
 
+  useEffect(() => {
+  const unsubscribe = auth.onAuthStateChanged((user) => {
+    if (!user) {
+      navigate("/login"); // 🔒 redirect to login if not signed in
+    } else {
+      setUserName(user.displayName || "User"); // 👤 display name from Firebase
+    }
+  });
+
+  return () => unsubscribe(); // cleanup on unmount
+}, [navigate]);
+  
+  /* ------------------------------------------------------------------ */
+  /*  Quick‑action definitions                                          */
+  /* ------------------------------------------------------------------ */
   const quickActions = [
     {
       id: "shopping-guide",
@@ -43,7 +67,7 @@ const Dashboard = () => {
       icon: "🤖",
       title: "Chat with Assistant",
       description: "Get instant help and support",
-      path: "/chat",
+      path: "/chat", // retained for reference
     },
     {
       id: "local-insights",
@@ -54,10 +78,23 @@ const Dashboard = () => {
     },
   ];
 
+  /* ------------------------------------------------------------------ */
+  /*  Click handler for the quick‑action cards                           */
+  /* ------------------------------------------------------------------ */
   const handleQuickAction = (action) => {
-    console.log(`Navigating to ${action.path}`);
+    if (action.id === "chat-assistant") {
+      setIsChatOpen(true);                      // open the drawer
+      return;
+    }
+    navigate(action.path); // ✅ Actually navigate to the page
+
+    // If you use react‑router:
+    // navigate(action.path);
   };
 
+  /* ------------------------------------------------------------------ */
+  /*  Helper to render the correct store‑layout component               */
+  /* ------------------------------------------------------------------ */
   const renderStoreLayout = () => {
     if (!selectedStore) return <p>Loading store layout...</p>;
 
@@ -73,8 +110,12 @@ const Dashboard = () => {
     }
   };
 
+  /* ------------------------------------------------------------------ */
+  /*  JSX                                                               */
+  /* ------------------------------------------------------------------ */
   return (
     <div className="dashboard">
+      {/* ---------- Header ---------- */}
       <div className="dashboard-header">
         <div className="welcome-section">
           <h1>Welcome {userName}</h1>
@@ -92,6 +133,7 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* ---------- Store location & layout ---------- */}
       {selectedStore && (
         <div className="store-location-section">
           <div className="location-header">
@@ -106,14 +148,15 @@ const Dashboard = () => {
           </div>
 
           <div className="store-layout-container">
-            <h2 className="text-xl font-bold mb-2">Store Layout ({layoutType})</h2>
-            <div className="store-layout-box">
-              {renderStoreLayout()}
-            </div>
+            <h2 className="text-xl font-bold mb-2">
+              Store Layout ({layoutType})
+            </h2>
+            <div className="store-layout-box">{renderStoreLayout()}</div>
           </div>
         </div>
       )}
 
+      {/* ---------- Quick Actions ---------- */}
       <div className="quick-actions-section">
         <h2>Quick Actions</h2>
         <div className="actions-grid">
@@ -134,6 +177,7 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* ---------- Highlights ---------- */}
       <div className="highlights-section">
         <h2>Today's Highlights</h2>
         <div className="highlights-grid">
@@ -161,6 +205,7 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* ---------- Recent Activity ---------- */}
       <div className="recent-activity-section">
         <h2>Recent Activity</h2>
         <div className="activity-list">
@@ -187,6 +232,14 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* ---------- Chat Drawer ---------- */}
+      {isChatOpen && (
+        <ChatDrawer
+          open      /* remove or rename if ChatDrawer doesn’t need this prop */
+          onClose={() => setIsChatOpen(false)}
+        />
+      )}
     </div>
   );
 };

@@ -27,12 +27,17 @@ const GlobeComponent = ({ onCountryClick }) => {
   useEffect(() => {
     if (globeRef.current) {
       globeRef.current.pointOfView({ lat: 37.0902, lng: -95.7129, altitude: 2.2 }, 1500);
-      setTimeout(() => {
-        const controls = globeRef.current.controls();
+    }
+
+    const timeoutId = setTimeout(() => {
+      const controls = globeRef.current?.controls?.();
+      if (controls) {
         controls.autoRotate = true;
         controls.autoRotateSpeed = 0.5;
-      }, 2000);
-    }
+      }
+    }, 2000);
+
+    return () => clearTimeout(timeoutId); // 🧹 cleanup
   }, []);
 
   // 💡 Add ambient light
@@ -45,10 +50,17 @@ const GlobeComponent = ({ onCountryClick }) => {
   }, []);
 
   // 👉 Handle store point click
-  const handleStoreSelect = (store) => {
-    localStorage.setItem("selectedStore", JSON.stringify(store));
-    navigate("dashboard"); // 🔁 Redirect to layout page
-  };
+  // 👉 Handle store point click
+const handleStoreSelect = (store) => {
+  const loggedInUser = localStorage.getItem("user");
+  if (!loggedInUser) {
+    navigate("/login");
+    return;
+  }
+
+  localStorage.setItem("selectedStore", JSON.stringify(store));
+  navigate("dashboard");
+};
 
   return (
     <div className="relative h-[600px] w-full bg-gradient-to-br from-[#0b0b28] to-[#191970]">
