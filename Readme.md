@@ -1,40 +1,72 @@
+Absolutely! Here's an updated **`README.md`** in Markdown that reflects all the new features you’ve added to **WalmartWise**, including the interactive layout builder, search with smart highlights, local insights, and improved UI/UX across the board:
+
+---
+
+````markdown
 # 💼 WalmartWise
 
-WalmartWise is an interactive, visually engaging web platform that helps users explore Walmart’s offerings using a 3D globe interface and step-by-step navigation. Designed for an immersive user experience, it features geospatial data visualization, user authentication, and dynamic content flow.
+**WalmartWise** is an interactive, visually rich web platform that reimagines the in-store experience at Walmart. From exploring stores across the globe to navigating aisle-level layouts and real-time local insights, WalmartWise offers a smart, immersive shopping assistant.
 
 ---
 
 ## 🌐 Live Demo
 
-> Coming Soon 
+> Coming Soon 🚀
 
 ---
 
 ## 📸 Preview
 
-Coming Soon
+> Coming Soon (GIFs and screenshots of globe + store layout + local insights)
 
 ---
 
 ## ✨ Features
 
-* 🌍 Interactive 3D Globe using `react-globe.gl`
-* 🧱 Step-by-step Walmart shopping guide
-* 🔐 Google Authentication
-* 🗺️ Country click detection
-* 🎨 Animated background and glowing UI
-* 👤 User-specific menus
-* 📱 Fully responsive and mobile-friendly design
+### 🌍 Global Store Exploration
+- Interactive **3D Globe** using `react-globe.gl`
+- Click on countries to explore Walmart presence
+- Glow effects and country detection
+
+### 🛒 Smart Store Layout Navigation
+- **Zoomable, interactive store layouts**
+- Category-wise shopping zones: Electronics, Grocery, Furniture, etc.
+- 2D/3D toggle view
+- Click-to-highlight sections
+- Step-by-step shopping **path planner**
+- Real-time estimated shopping time
+
+### 🔍 Intelligent Search
+- Search by **product, category, or store area**
+- Auto-opens relevant section and highlights matching product
+- Works with partial keywords too
+
+### 📊 Local Insights
+- Visual **cards** showing:
+  - Popularity/Crowd level
+  - Ongoing Offers
+  - Recent Search Trends
+- **Grid view** for quick glance (no map fatigue)
+
+### 🔐 Google Authentication
+- Sign in with Google
+- Personalized store view per user
+
+### 🌈 UI & UX
+- Glowing effects, smooth transitions
+- Responsive design for all screen sizes
+- Light/dark backgrounds with animated layouts
 
 ---
 
 ## ⚙️ Tech Stack
 
-| Frontend             | Backend              | Other Services            |
-| -------------------- | -------------------- | ------------------------- |
-| React + Vite / CRA   | Express.js + Node.js | Google OAuth 2.0          |
-| TailwindCSS / CSS    | MongoDB (optional)   | REST APIs                 |
-| Three.js (via Globe) | JWT / Session-based  | Netlify / Vercel / Render |
+| Frontend               | Backend              | Other Services            |
+| ----------------------| -------------------- | ------------------------- |
+| React + Vite / CRA     | Express.js + Node.js | Google OAuth 2.0          |
+| Tailwind CSS / CSS     | MongoDB (optional)   | REST APIs                 |
+| react-globe.gl + D3.js | JWT / Session-based  | Netlify / Vercel / Render |
+| Material UI            |                      |                           |
 
 ---
 
@@ -45,7 +77,7 @@ Coming Soon
 ```bash
 git clone https://github.com/your-username/walmartwise.git
 cd walmartwise
-```
+````
 
 ### 2. Install Dependencies
 
@@ -61,7 +93,7 @@ Create a `.env` file in the root of the project with the following:
 REACT_APP_BACKEND_URL=http://localhost:5000
 ```
 
-For backend:
+For backend (inside `/backend/.env`):
 
 ```env
 GOOGLE_CLIENT_ID=your-google-client-id
@@ -77,7 +109,7 @@ SESSION_SECRET=your-random-secret
 npm start
 ```
 
-#### Backend (if applicable)
+#### Backend
 
 ```bash
 cd backend
@@ -97,28 +129,57 @@ npm run dev
 
 ---
 
-## 👨‍💻 Developer Notes
+## 🗂 Folder Structure (Important)
 
-* All globe data is powered via [GeoJSON](https://github.com/holtzy/D3-graph-gallery/blob/master/DATA/world.geojson).
-* Globe component uses `three-globe` and `three.js` under the hood.
-* Login uses Google OAuth 2.0 with cookie session-based auth.
+```
+walmartwise/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── GlobeView.jsx
+│   │   ├── StoreLayout.jsx
+│   │   ├── LocalInsightsPage.jsx
+│   │   └── ...
+│   ├── pages/
+│   │   ├── LoginPage.jsx
+│   │   ├── Dashboard.jsx
+│   │   └── StoreLayoutPage.jsx
+│   ├── App.js
+│   └── index.css
+├── backend/
+│   └── (Express app files)
+```
+
+---
+
+## 🧠 Developer Notes
+
+* Store layout data is JSON-defined with grid mapping.
+* Local insights are mock-fed for now (real-time data integration WIP).
+* Search is keyword-mapped to both sections and product data.
+* Optimized for smooth user transitions and path suggestions.
 
 ---
 
 ## 🙌 Contributing
 
-Contributions, suggestions, and forks are welcome!
+Contributions and ideas welcome!
 
 ```bash
-git checkout -b your-feature
-git commit -m "Added something"
-git push origin your-feature
+git checkout -b new-feature
+git commit -m "✨ Added feature"
+git push origin new-feature
 ```
 
 ---
 
 ## 📄 License
 
-MIT License. Feel free to use or modify for your own Walmart-style visualization tools.
+MIT License. Use, modify, and share freely.
 
 ---
+
+```
+
+---
+
