@@ -173,8 +173,3 @@ git push origin new-feature
 MIT License. Use, modify, and share freely.
 
 ---
-
-```
-
----
-
