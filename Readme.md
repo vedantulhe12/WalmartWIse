@@ -1,8 +1,3 @@
-Absolutely! Here's an updated **`README.md`** in Markdown that reflects all the new features you’ve added to **WalmartWise**, including the interactive layout builder, search with smart highlights, local insights, and improved UI/UX across the board:
-
----
-
-````markdown
 # 💼 WalmartWise
 
 **WalmartWise** is an interactive, visually rich web platform that reimagines the in-store experience at Walmart. From exploring stores across the globe to navigating aisle-level layouts and real-time local insights, WalmartWise offers a smart, immersive shopping assistant.
