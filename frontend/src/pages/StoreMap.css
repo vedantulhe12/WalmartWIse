@@ -1,267 +1,60 @@
-/* src/pages/StoreMap.css */
+/* StoreMap.css */
 
 .store-map-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   padding: 20px;
-  font-family: 'Roboto', sans-serif;
+  background: #f9fafc;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
 }
 
 .map-header {
-  background: #ffffff;
-  border-radius: 16px !important;
-  padding: 24px;
-  margin-bottom: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.header-top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
   gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
 }
 
-.header-title {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.map-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.map-header input {
   flex: 1;
-  min-width: 200px;
+  min-width: 250px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border 0.3s;
 }
 
-.map-icon {
-  font-size: 2.5rem !important;
-  color: #1976d2;
-  background: linear-gradient(45deg, #1976d2, #42a5f5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.title-text {
-  font-weight: 700 !important;
-  color: #1a1a1a;
-  background: linear-gradient(45deg, #1976d2, #1565c0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.map-header input:focus {
+  border-color: #0077ff;
 }
 
 .back-btn {
-  background: rgba(25, 118, 210, 0.1) !important;
-  border: 2px solid rgba(25, 118, 210, 0.2) !important;
-  transition: all 0.3s ease !important;
-  width: 48px;
-  height: 48px;
+  background: #eaeaea;
+  color: #333;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .back-btn:hover {
-  background: rgba(25, 118, 210, 0.2) !important;
-  border-color: rgba(25, 118, 210, 0.4) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.3);
-}
-
-.store-info {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.store-chip {
-  background: rgba(76, 175, 80, 0.1) !important;
-  border-color: rgba(76, 175, 80, 0.3) !important;
-  color: #2e7d32 !important;
-  font-weight: 500 !important;
-  transition: all 0.3s ease !important;
-}
-
-.store-chip:hover {
-  background: rgba(76, 175, 80, 0.2) !important;
-  transform: translateY(-1px);
-}
-
-.location-chip {
-  background: rgba(255, 152, 0, 0.1) !important;
-  border-color: rgba(255, 152, 0, 0.3) !important;
-  color: #f57c00 !important;
-  font-weight: 500 !important;
-  transition: all 0.3s ease !important;
-}
-
-.location-chip:hover {
-  background: rgba(255, 152, 0, 0.2) !important;
-  transform: translateY(-1px);
-}
-
-.layout-chip {
-  background: linear-gradient(45deg, #1976d2, #42a5f5) !important;
-  color: white !important;
-  font-weight: 600 !important;
-  transition: all 0.3s ease !important;
-}
-
-.layout-chip:hover {
-  background: linear-gradient(45deg, #1565c0, #1976d2) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.4);
-}
-
-.search-container {
-  margin-top: 16px;
-}
-
-.search-field {
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 12px !important;
-  transition: all 0.3s ease !important;
-}
-
-.search-field .MuiOutlinedInput-root {
-  border-radius: 12px !important;
-  background: rgba(255, 255, 255, 0.9);
-  transition: all 0.3s ease !important;
-}
-
-.search-field .MuiOutlinedInput-root:hover {
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-.search-field .MuiOutlinedInput-root.Mui-focused {
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0 4px 20px rgba(25, 118, 210, 0.2);
-}
-
-.search-field .MuiOutlinedInput-input {
-  padding: 16px 14px !important;
-  font-size: 16px;
-  color: #333;
-}
-
-.search-field .MuiOutlinedInput-input::placeholder {
-  color: #666;
-  opacity: 0.7;
+  background: #d4d4d4;
 }
 
 .layout-container {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  min-height: 600px;
-  position: relative;
-  overflow: hidden;
-}
-
-.layout-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #1976d2, #42a5f5, #1976d2);
-  border-radius: 16px 16px 0 0;
-}
-
-/* Loading state styling */
-.layout-container p {
-  text-align: center;
-  color: #666;
-  font-size: 18px;
-  margin-top: 100px;
-  font-weight: 500;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .store-map-page {
-    padding: 16px;
-  }
-  
-  .map-header {
-    padding: 16px;
-  }
-  
-  .header-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  
-  .header-title {
-    min-width: auto;
-  }
-  
-  .title-text {
-    font-size: 1.75rem !important;
-  }
-  
-  .store-info {
-    width: 100%;
-    justify-content: flex-start;
-  }
-  
-  .layout-container {
-    padding: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .store-info {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .store-chip,
-  .location-chip,
-  .layout-chip {
-    width: 100%;
-    justify-content: flex-start;
-  }
-}
-
-/* Animation keyframes */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.store-map-page {
-  animation: fadeIn 0.6s ease-out;
-}
-
-/* Chip hover animations */
-.store-chip .MuiChip-icon,
-.location-chip .MuiChip-icon,
-.layout-chip .MuiChip-icon {
-  transition: transform 0.3s ease !important;
-}
-
-.store-chip:hover .MuiChip-icon,
-.location-chip:hover .MuiChip-icon,
-.layout-chip:hover .MuiChip-icon {
-  transform: scale(1.1);
-}
-
-/* Search field focus states */
-.search-field .MuiInputAdornment-root .MuiSvgIcon-root {
-  transition: color 0.3s ease;
-}
-
-.search-field .MuiOutlinedInput-root.Mui-focused .MuiInputAdornment-root .MuiSvgIcon-root {
-  color: #1976d2;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }

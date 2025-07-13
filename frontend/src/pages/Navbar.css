@@ -25,11 +25,20 @@
   color: white;
   text-decoration: none;
   transition: color 0.3s ease;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  outline: none;
+  border: none;
 }
 
-.navbar-link:hover {
-  color: #fde68a; /* yellow-300 */
+.navbar-link:focus,
+.navbar-link:active {
+  outline: none !important;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
 }
+
 
 .navbar-button {
   background-color: #facc15; /* yellow-400 */

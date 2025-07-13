@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import ShoppingGuide from "./pages/ShoppingGuide";
 import StoreMap from "./pages/StoreMap";
 import LocalInsightsPage from "./pages/LocalInsightPage";
+import StepByStepGuide from "./pages/StepByStepGuide";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/guide" element={<ShoppingGuide />} />
         <Route path="/map" element={<StoreMap />} />
         <Route path="/insights" element={<LocalInsightsPage />} />
+        <Route path="/step-by-step" element={<StepByStepGuide />} />
       </Routes>
     </>
   );

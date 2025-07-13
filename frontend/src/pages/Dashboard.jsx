@@ -91,10 +91,6 @@ const [userName, setUserName] = useState(""); // updated to allow dynamic name
     // If you use react‑router:
     // navigate(action.path);
   };
-
-  /* ------------------------------------------------------------------ */
-  /*  Helper to render the correct store‑layout component               */
-  /* ------------------------------------------------------------------ */
   const renderStoreLayout = () => {
     if (!selectedStore) return <p>Loading store layout...</p>;
 
