@@ -1,29 +1,37 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-import GlobeComponent from '../pages/Globe';
+// Mock Globe Component for demonstration
+import GlobeComponent from '../pages/Globe'; // Adjust path/case if needed for your project structure or file structure.
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [isHoveringMagnify, setIsHoveringMagnify] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const cursorRef = useRef(null);
 
   useEffect(() => {
     setIsVisible(true);
 
+    // Optimized mouse move handler
     const handleMouseMove = (e) => {
       setCursorPosition({ x: e.clientX, y: e.clientY });
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
-    return () => document.removeEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   const handleCountryClick = (countryName) => {
     console.log("Country clicked:", countryName);
     // You can navigate to: navigate(`/stores/${countryName}`);
   };
+
+  const handleTextHover = useCallback((isEntering) => {
+    setIsHovering(isEntering);
+  }, []);
 
   const features = [
     {
@@ -54,14 +62,12 @@ const Home = () => {
       {/* Custom Cursor */}
       <div 
         ref={cursorRef}
-        className={`custom-cursor ${isHoveringMagnify ? 'magnify' : ''}`}
+        className={`custom-cursor ${isHovering ? 'hovering' : ''}`}
         style={{
-          left: `${cursorPosition.x}px`,
-          top: `${cursorPosition.y}px`,
+          transform: `translate3d(${cursorPosition.x - 15}px, ${cursorPosition.y - 15}px, 0)`,
         }}
       >
-        <div className="cursor-dot"></div>
-        <div className="cursor-outline"></div>
+        <div className="cursor-circle"></div>
       </div>
 
       {/* Animated background elements */}
@@ -69,18 +75,6 @@ const Home = () => {
         <div className="bg-blob bg-blob-1"></div>
         <div className="bg-blob bg-blob-2"></div>
       </div>
-
-      {/* Navigation */}
-      <nav className="navigation">
-        <div className="nav-container">
-          <div className="nav-logo">
-            <div className="logo-icon">
-              <span>W</span>
-            </div>
-            <span className="logo-text">WalmartWise</span>
-          </div>
-        </div>
-      </nav>
 
       {/* Hero Section */}
       <main className="main-content">
@@ -99,17 +93,17 @@ const Home = () => {
                 
                 <h1 className="hero-title">
                   <span 
-                    className="title-explore magnify-text"
-                    onMouseEnter={() => setIsHoveringMagnify(true)}
-                    onMouseLeave={() => setIsHoveringMagnify(false)}
+                    className="title-explore hover-text"
+                    onMouseEnter={() => handleTextHover(true)}
+                    onMouseLeave={() => handleTextHover(false)}
                   >
                     Explore
                   </span>
                   <br />
                   <span 
-                    className="title-walmart magnify-text"
-                    onMouseEnter={() => setIsHoveringMagnify(true)}
-                    onMouseLeave={() => setIsHoveringMagnify(false)}
+                    className="title-walmart hover-text"
+                    onMouseEnter={() => handleTextHover(true)}
+                    onMouseLeave={() => handleTextHover(false)}
                   >
                     Global Walmart
                   </span>
@@ -122,11 +116,19 @@ const Home = () => {
               </div>
 
               <div className="hero-buttons">
-                <button className="btn-primary">
+                <button   
+                  className="btn-primary"
+                  onMouseEnter={() => handleTextHover(true)}
+                  onMouseLeave={() => handleTextHover(false)}
+                >
                   <span>Start Exploring</span>
                   <span className="btn-arrow">→</span>
                 </button>
-                <button className="btn-secondary">
+                <button 
+                  className="btn-secondary"
+                  onMouseEnter={() => handleTextHover(true)}
+                  onMouseLeave={() => handleTextHover(false)}
+                >
                   View Features
                 </button>
               </div>
@@ -136,9 +138,9 @@ const Home = () => {
                 {stats.map((stat, index) => (
                   <div key={index} className="stat-card">
                     <div 
-                      className="stat-number magnify-text"
-                      onMouseEnter={() => setIsHoveringMagnify(true)}
-                      onMouseLeave={() => setIsHoveringMagnify(false)}
+                      className="stat-number hover-text"
+                      onMouseEnter={() => handleTextHover(true)}
+                      onMouseLeave={() => handleTextHover(false)}
                     >
                       {stat.number}
                     </div>
@@ -161,9 +163,9 @@ const Home = () => {
           <div className="features-section">
             <div className="features-header">
               <h2 
-                className="features-title magnify-text"
-                onMouseEnter={() => setIsHoveringMagnify(true)}
-                onMouseLeave={() => setIsHoveringMagnify(false)}
+                className="features-title hover-text"
+                onMouseEnter={() => handleTextHover(true)}
+                onMouseLeave={() => handleTextHover(false)}
               >
                 Powerful Features
               </h2>
@@ -183,9 +185,9 @@ const Home = () => {
                     {feature.icon}
                   </div>
                   <h3 
-                    className="feature-title magnify-text"
-                    onMouseEnter={() => setIsHoveringMagnify(true)}
-                    onMouseLeave={() => setIsHoveringMagnify(false)}
+                    className="feature-title hover-text"
+                    onMouseEnter={() => handleTextHover(true)}
+                    onMouseLeave={() => handleTextHover(false)}
                   >
                     {feature.title}
                   </h3>
@@ -198,16 +200,20 @@ const Home = () => {
           {/* CTA Section */}
           <div className="cta-section">
             <h2 
-              className="cta-title magnify-text"
-              onMouseEnter={() => setIsHoveringMagnify(true)}
-              onMouseLeave={() => setIsHoveringMagnify(false)}
+              className="cta-title hover-text"
+              onMouseEnter={() => handleTextHover(true)}
+              onMouseLeave={() => handleTextHover(false)}
             >
               Ready to Explore?
             </h2>
             <p className="cta-description">
               Click on any country in our interactive globe to start discovering Walmart stores near you.
             </p>
-            <button className="cta-button">
+            <button 
+              className="cta-button"
+              onMouseEnter={() => handleTextHover(true)}
+              onMouseLeave={() => handleTextHover(false)}
+            >
               <span>Start Your Journey</span>
               <span className="cta-arrow">⬇️</span>
             </button>
@@ -225,7 +231,7 @@ const Home = () => {
         }
 
         /* Custom Cursor Styles */
-        .homepage  *{
+        .homepage * {
           cursor: none !important;
         }
 
@@ -235,86 +241,38 @@ const Home = () => {
           left: 0;
           pointer-events: none;
           z-index: 9999;
-          transition: transform 0.1s ease-out;
+          will-change: transform;
+          transition: opacity 0.2s ease;
         }
 
-        .cursor-dot {
-          width: 8px;
-          height: 8px;
-          background: #fbbf24;
+        .cursor-circle {
+          width: 20px;
+          height: 20px;
           border-radius: 50%;
-          position: absolute;
-          top: -4px;
-          left: -4px;
-          transition: all 0.2s ease-out;
+          background: rgba(255, 255, 255, 0.6);
+          transition: all 0.3s ease;
         }
 
-        .cursor-outline {
+        .custom-cursor.hovering .cursor-circle {
           width: 40px;
           height: 40px;
-          border: 2px solid rgba(251, 191, 36, 0.3);
-          border-radius: 50%;
-          position: absolute;
-          top: -20px;
-          left: -20px;
-          transition: all 0.3s ease-out;
+          background: rgba(251, 191, 36, 0.3);
+          border: 2px solid rgba(251, 191, 36, 0.8);
         }
 
-        .custom-cursor.magnify .cursor-dot {
-          transform: scale(3);
-          background: #fcd34d;
-          box-shadow: 0 0 20px rgba(252, 211, 77, 0.8);
-        }
-
-        .custom-cursor.magnify .cursor-outline {
-          transform: scale(2.5);
-          border-color: rgba(252, 211, 77, 0.8);
-          border-width: 3px;
-          box-shadow: 0 0 30px rgba(252, 211, 77, 0.3);
-        }
-
-        .magnify-text {
-          transition: all 0.3s ease-out;
+        .hover-text {
+          transition: all 0.3s ease;
+          cursor: none !important;
           position: relative;
-          z-index: 1;
+          display: inline-block;
         }
 
-        .magnify-text:hover {
-          transform: scale(1.1);
-          text-shadow: 0 0 30px rgba(252, 211, 77, 0.6);
-        }
-
-        .title-explore.magnify-text:hover {
-          background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 50%, #f59e0b 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .title-walmart.magnify-text:hover {
-          background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .stat-number.magnify-text:hover {
-          color: #fcd34d;
-        }
-
-        .features-title.magnify-text:hover {
-          background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 50%, #f59e0b 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .feature-title.magnify-text:hover {
-          color: #fcd34d;
-        }
-
-        .cta-title.magnify-text:hover {
-          color: #fcd34d;
+        .hover-text:hover {
+          transform: scale(1.05);
+          text-shadow: 
+            0 0 10px rgba(251, 191, 36, 0.6),
+            0 0 20px rgba(251, 191, 36, 0.4);
+          filter: brightness(1.2);
         }
 
         .background-animation {
@@ -687,28 +645,20 @@ const Home = () => {
 
         .feature-card:hover,
         .feature-card.active {
-          border-color: rgba(251, 191, 36, 0.4);
-          background: rgba(251, 191, 36, 0.1);
           transform: translateY(-5px);
-          box-shadow: 0 20px 40px rgba(251, 191, 36, 0.2);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
         .feature-icon {
-          width: 64px;
-          height: 64px;
-          border-radius: 12px;
+          width: 40px;
+          height: 40px;
+          background: linear-gradient(135deg, #fbbf24 0%, #fde047 100%);
+          border-radius: 8px;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 2rem;
-          margin-bottom: 1.5rem;
-          background: rgba(255, 255, 255, 0.1);
-          transition: all 0.3s ease;
-        }
-
-        .feature-card.active .feature-icon {
-          background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-          box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+          box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+          margin-bottom: 1rem;
         }
 
         .feature-title {
@@ -736,6 +686,10 @@ const Home = () => {
           font-size: 2rem;
           font-weight: bold;
           margin-bottom: 1rem;
+          background: linear-gradient(135deg, #fbbf24 0%, #fde047 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         @media (min-width: 1024px) {
@@ -745,9 +699,8 @@ const Home = () => {
         }
 
         .cta-description {
-          font-size: 1.25rem;
-          color: #dbeafe;
-          line-height: 1.6;
+          font-size: 1.125rem;
+          color: #fcd34d;
           max-width: 600px;
           margin: 0 auto 2rem;
         }
@@ -756,68 +709,28 @@ const Home = () => {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          padding: 1rem 2.5rem;
+          padding: 1rem 2rem;
           background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
           color: black;
-          font-weight: bold;
-          font-size: 1.125rem;
+          font-weight: 600;
           border: none;
           border-radius: 50px;
           transition: all 0.3s ease;
-          box-shadow: 0 15px 40px rgba(251, 191, 36, 0.3);
+          box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
         }
 
         .cta-button:hover {
           background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 100%);
-          transform: translateY(-3px);
-          box-shadow: 0 20px 50px rgba(251, 191, 36, 0.4);
+          transform: translateY(-2px);
+          box-shadow: 0 15px 40px rgba(251, 191, 36, 0.4);
         }
 
         .cta-arrow {
-          animation: bounce 2s infinite;
+          transition: transform 0.3s ease;
         }
 
-        @keyframes bounce {
-          0%, 20%, 53%, 80%, 100% { transform: translateY(0px); }
-          40%, 43% { transform: translateY(-10px); }
-          70% { transform: translateY(-5px); }
-        }
-
-        button:focus,
-        .feature-card:focus {
-          outline: 2px solid #fbbf24;
-          outline-offset: 2px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 640px) {
-          .hero-title {
-            font-size: 2.5rem;
-          }
-          
-          .hero-description {
-            font-size: 1.125rem;
-          }
-          
-          .stats-grid {
-            gap: 1rem;
-          }
-          
-          .stat-number {
-            font-size: 1.25rem;
-          }
-          
-          .features-section {
-            padding: 1.5rem;
-          }
-          
-          .cta-section {
-            padding: 2rem;
-          }
-        }
-
-        html {
-          scroll-behavior: smooth;
+        .cta-button:hover .cta-arrow {
+          transform: translateY(2px);
         }
       `}</style>
     </div>

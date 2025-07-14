@@ -41,8 +41,14 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar">
-        <h1 className="navbar-title">WalmartWise</h1>
+      <nav className="navbar">  
+        <div className="nav-logo">
+  <div className="logo-icon">
+    <span>W</span>
+  </div>
+  <span className="logo-text">WalmartWise</span>
+</div>
+
         <div className="navbar-links">
           <Link to="/" className="navbar-link">Home</Link>
           {user ? (

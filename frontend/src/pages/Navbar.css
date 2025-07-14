@@ -53,3 +53,29 @@
 .navbar-button:hover {
   background-color: #fde047; /* hover yellow */
 }
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+}
+
+.logo-icon {
+  background-color: white;
+  color: #1e3a8a; /* Tailwind's blue-900 */
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  color: white;
+}

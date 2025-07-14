@@ -46,7 +46,7 @@
     const [customerPath, setCustomerPath] = useState([]);
     const [isPathMode, setIsPathMode] = useState(false);
     const [showGrid, setShowGrid] = useState(false);
-    const [viewMode, setViewMode] = useState('3d');
+    const [viewMode, setViewMode] = useState('2d');
     const [animationEnabled, setAnimationEnabled] = useState(true);
     const [detailsOpen, setDetailsOpen] = useState(false);
 
