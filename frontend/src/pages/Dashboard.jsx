@@ -13,6 +13,7 @@ const [userName, setUserName] = useState(""); // updated to allow dynamic name
   const [selectedStore, setSelectedStore] = useState(null);
   const [layoutType, setLayoutType] = useState("small");
   const [isChatOpen, setIsChatOpen] = useState(false); // chat‑drawer state
+  const [currentHighlight, setCurrentHighlight] = useState(1); // for carousel
 
   
 
@@ -79,6 +80,36 @@ const [userName, setUserName] = useState(""); // updated to allow dynamic name
   ];
 
   /* ------------------------------------------------------------------ */
+  /*  Highlights data                                                   */
+  /* ------------------------------------------------------------------ */
+  const highlights = [
+    {
+      id: 0,
+      title: "Summer Collection",
+      description: "Discover the hottest trends and must-have items for this summer season.",
+      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=250&fit=crop",
+      badge: "Hot 🔥",
+      buttonText: "Shop Now"
+    },
+    {
+      id: 1,
+      title: "Special Electronics Deal",
+      description: "Limited time offer on premium electronics. Get up to 50% off on selected items.",
+      image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&h=250&fit=crop",
+      badge: "50% OFF 🎉",
+      buttonText: "Grab Deal"
+    },
+    {
+      id: 2,
+      title: "Fashion Forward",
+      description: "Latest fashion arrivals featuring cutting-edge designs and premium quality.",
+      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=250&fit=crop",
+      badge: "New ✨",
+      buttonText: "Explore"
+    }
+  ];
+
+  /* ------------------------------------------------------------------ */
   /*  Click handler for the quick‑action cards                           */
   /* ------------------------------------------------------------------ */
   const handleQuickAction = (action) => {
@@ -91,6 +122,30 @@ const [userName, setUserName] = useState(""); // updated to allow dynamic name
     // If you use react‑router:
     // navigate(action.path);
   };
+
+  /* ------------------------------------------------------------------ */
+  /*  Carousel navigation functions                                      */
+  /* ------------------------------------------------------------------ */
+  const nextHighlight = () => {
+    setCurrentHighlight((prev) => (prev + 1) % highlights.length);
+  };
+
+  const prevHighlight = () => {
+    setCurrentHighlight((prev) => (prev - 1 + highlights.length) % highlights.length);
+  };
+
+  const goToHighlight = (index) => {
+    setCurrentHighlight(index);
+  };
+
+  /* ------------------------------------------------------------------ */
+  /*  Auto-rotate carousel                                               */
+  /* ------------------------------------------------------------------ */
+  useEffect(() => {
+    const interval = setInterval(nextHighlight, 5000); // Auto-rotate every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   const renderStoreLayout = () => {
     if (!selectedStore) return <p>Loading store layout...</p>;
 
@@ -174,30 +229,65 @@ const [userName, setUserName] = useState(""); // updated to allow dynamic name
       </div>
 
       {/* ---------- Highlights ---------- */}
-      <div className="highlights-section">
+      <div className="highlights-section-new">
         <h2>Today's Highlights</h2>
-        <div className="highlights-grid">
-          <div className="highlight-card trending">
-            <div className="highlight-icon">🔥</div>
-            <div className="highlight-content">
-              <h4>Trending Now</h4>
-              <p>Summer collection items</p>
-            </div>
-          </div>
-          <div className="highlight-card offers">
-            <div className="highlight-icon">🎉</div>
-            <div className="highlight-content">
-              <h4>Special Offers</h4>
-              <p>Up to 50% off on electronics</p>
-            </div>
-          </div>
-          <div className="highlight-card new-arrivals">
-            <div className="highlight-icon">✨</div>
-            <div className="highlight-content">
-              <h4>New Arrivals</h4>
-              <p>Latest fashion trends</p>
-            </div>
-          </div>
+        <div className="highlights-carousel">
+          {highlights.map((highlight, index) => {
+            // Calculate position based on current highlight
+            let position;
+            let cardClass = "highlight-card-new";
+            
+            if (index === currentHighlight) {
+              position = "center";
+              cardClass += " center-position active";
+            } else if (index === (currentHighlight - 1 + highlights.length) % highlights.length) {
+              position = "left";
+              cardClass += " left-position inactive";
+            } else if (index === (currentHighlight + 1) % highlights.length) {
+              position = "right";
+              cardClass += " right-position inactive";
+            } else {
+              position = "hidden";
+              cardClass += " hidden-position";
+            }
+
+            return (
+              <div
+                key={highlight.id}
+                className={cardClass}
+                data-position={position}
+                onClick={() => goToHighlight(index)}
+              >
+                <div className="highlight-image">
+                  <img src={highlight.image} alt={highlight.title} />
+                  <div className="highlight-badge">{highlight.badge}</div>
+                </div>
+                <div className="highlight-content-new">
+                  <h3>{highlight.title}</h3>
+                  <p>{highlight.description}</p>
+                  <button className="highlight-btn">{highlight.buttonText}</button>
+                </div>
+              </div>
+            );
+          })}
+
+          {/* Navigation arrows */}
+          <button className="carousel-nav prev" onClick={prevHighlight}>
+            ←
+          </button>
+          <button className="carousel-nav next" onClick={nextHighlight}>
+            →
+          </button>
+        </div>
+
+        <div className="highlights-indicators">
+          {highlights.map((_, index) => (
+            <div
+              key={index}
+              className={`indicator ${index === currentHighlight ? 'active' : ''}`}
+              onClick={() => goToHighlight(index)}
+            />
+          ))}
         </div>
       </div>
 
