@@ -4,26 +4,20 @@
 
 ---
 
-## 🌐 Live Demo
-
-> Coming Soon 🚀
-
----
-
-## 📸 Preview
+## Preview
 
 > Coming Soon (GIFs and screenshots of globe + store layout + local insights)
 
 ---
 
-## ✨ Features
+## Features
 
-### 🌍 Global Store Exploration
+### Global Store Exploration
 - Interactive **3D Globe** using `react-globe.gl`
 - Click on countries to explore Walmart presence
 - Glow effects and country detection
 
-### 🛒 Smart Store Layout Navigation
+### Smart Store Layout Navigation
 - **Zoomable, interactive store layouts**
 - Category-wise shopping zones: Electronics, Grocery, Furniture, etc.
 - 2D/3D toggle view
@@ -31,23 +25,23 @@
 - Step-by-step shopping **path planner**
 - Real-time estimated shopping time
 
-### 🔍 Intelligent Search
+### Intelligent Search
 - Search by **product, category, or store area**
 - Auto-opens relevant section and highlights matching product
 - Works with partial keywords too
 
-### 📊 Local Insights
+### Local Insights
 - Visual **cards** showing:
   - Popularity/Crowd level
   - Ongoing Offers
   - Recent Search Trends
 - **Grid view** for quick glance (no map fatigue)
 
-### 🔐 Google Authentication
+### Google Authentication
 - Sign in with Google
 - Personalized store view per user
 
-### 🌈 UI & UX
+### UI & UX
 - Glowing effects, smooth transitions
 - Responsive design for all screen sizes
 - Light/dark backgrounds with animated layouts
@@ -65,7 +59,7 @@
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the Repo
 
@@ -114,7 +108,7 @@ npm run dev
 
 ---
 
-## 🥪 API Endpoints
+## API Endpoints
 
 | Method | Endpoint         | Description          |
 | ------ | ---------------- | -------------------- |
@@ -147,7 +141,7 @@ walmartwise/
 
 ---
 
-## 🧠 Developer Notes
+## Developer Notes
 
 * Store layout data is JSON-defined with grid mapping.
 * Local insights are mock-fed for now (real-time data integration WIP).
@@ -156,7 +150,7 @@ walmartwise/
 
 ---
 
-## 🙌 Contributing
+## Contributing
 
 Contributions and ideas welcome!
 
@@ -168,7 +162,7 @@ git push origin new-feature
 
 ---
 
-## 📄 License
+## License
 
 MIT License. Use, modify, and share freely.
 
