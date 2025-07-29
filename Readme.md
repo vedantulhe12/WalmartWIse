@@ -7,13 +7,13 @@
 ## Preview
 
 ### 🔹 Homepage
-<img src="frontend/public/github_images/homepage.png" width="700"/>
+<img src="github_images/home.png" width="700"/>
 
 ### 🔹 Store Layout View
-<img src="frontend/public/preview/store-layout.png" width="700"/>
+<img src="github_images/Store Layout.png" width="700"/>
 
 ### 🔹 Local Insights
-<img src="frontend/public/preview/local-insights.png" width="700"/>
+<img src="github_images/Local Insights.png" width="700"/>
 
 ---
 
@@ -171,6 +171,6 @@ git push origin new-feature
 
 ## License
 
-MIT License. Use, modify, and share freely.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 ---
