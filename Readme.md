@@ -55,7 +55,7 @@
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 | Frontend               | Backend              | Other Services            |
 | ----------------------| -------------------- | ------------------------- |
