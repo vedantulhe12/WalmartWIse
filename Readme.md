@@ -6,7 +6,14 @@
 
 ## Preview
 
-> Coming Soon (GIFs and screenshots of globe + store layout + local insights)
+### 🔹 Homepage
+<img src="frontend/public/github_images/homepage.png" width="700"/>
+
+### 🔹 Store Layout View
+<img src="frontend/public/preview/store-layout.png" width="700"/>
+
+### 🔹 Local Insights
+<img src="frontend/public/preview/local-insights.png" width="700"/>
 
 ---
 
