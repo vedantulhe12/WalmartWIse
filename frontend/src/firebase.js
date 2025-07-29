@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBImKDL5EPQhIqTBmKYEKofEBXyyPBXvsY",
+  apiKey: "your_api_key",
   authDomain: "walmartwise-7761a.firebaseapp.com",
   projectId: "walmartwise-7761a",
   storageBucket: "walmartwise-7761a.appspot.com",
